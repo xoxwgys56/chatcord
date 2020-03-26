@@ -7,7 +7,7 @@
     "start": "node server",
     "dev": "nodemon server"
   },
-  "author": "Brad Traversy",
+  "author": "Daewon Kim",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
