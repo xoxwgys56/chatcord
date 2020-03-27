@@ -12,9 +12,10 @@ const { username, room } = Qs.parse(location.search, {
   ignoreQueryPrefix: true
 });
 
-// validation
+// redirect if no username or room
 if (username === undefined || room === undefined) {
   console.log('undefined user');
+  window.location.replace('http://localhost:3000');
 }
 
 const socket = io();
@@ -30,7 +31,6 @@ socket.on('roomUsers', ({ room, users }) => {
 
 // Message from the server
 socket.on('message', message => {
-  console.log(message);
   outputMessage(message);
 
   // Scroll down
@@ -54,6 +54,7 @@ chatForm.addEventListener('submit', e => {
 function outputMessage(message) {
   const div = document.createElement('div');
   div.classList.add('message');
+  if (message.type === 'BOT_MSG') div.classList.add('bot');
   div.innerHTML = `
   <p class="meta">
     ${message.username} <span>${message.time}</span>
